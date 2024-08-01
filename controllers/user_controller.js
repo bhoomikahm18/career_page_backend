@@ -49,3 +49,18 @@ module.exports.login = async (req, res) => {
 
     return res.status(200).json({ message: "Login Successfull" });
 }
+
+module.exports.getAllUsers = async (req, res) => {
+    let user;
+    try {
+        user = await User.find();
+    } catch (err) {
+        return console.log(err);
+    }
+
+    if (!user) {
+        return res.status(404).json({ message: "No Jobs Found" })
+    }
+
+    return res.status(200).json({ user });
+}

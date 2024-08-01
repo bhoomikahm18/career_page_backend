@@ -9,6 +9,10 @@ const jobSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    skills: {
+        type: String,
+        required: true,
+    },
     location: {
         type: String,
         required: true,
