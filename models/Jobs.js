@@ -20,7 +20,12 @@ const jobSchema = new mongoose.Schema({
     posted_on: {
         type: Date,
         required: true,
+    },
+    user: {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
     }
+
 })
 
 module.exports = mongoose.model("Job", jobSchema);

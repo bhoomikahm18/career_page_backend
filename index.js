@@ -8,8 +8,8 @@ const jobsRouter = require('./routes/job_routes.js');
 dotenv.config();
 
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 app.use("/user", userRouter);
 app.use("/jobs", jobsRouter)
 

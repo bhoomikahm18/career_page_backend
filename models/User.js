@@ -14,7 +14,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minLength: 6,
-    }
+    },
+    applied: [{type: mongoose.Types.ObjectId, ref: "Job"}]
 });
 
 module.exports = mongoose.model("User", userSchema);

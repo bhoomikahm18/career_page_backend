@@ -28,6 +28,7 @@ module.exports.register = async (req, res) => {
 
     return res.status(200).json({ user });
 }
+
 module.exports.login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -47,7 +48,7 @@ module.exports.login = async (req, res) => {
         password
     });
 
-    return res.status(200).json({ message: "Login Successfull" });
+    return res.status(200).json({ message: "Login Successfull", user});
 }
 
 module.exports.getAllUsers = async (req, res) => {

@@ -3,17 +3,17 @@ const Job = require("../models/Jobs.js");
 module.exports.addJobs = async (req, res) => {
     const { title, discription, skills, location, posted_on } = req.body;
 
-    const jobs = new Jobs({
+    const jobs = new Job({
         title,
         discription,
         skills,
         location,
-        posted_on
+        posted_on,
     })
 
     await jobs.save();
 
-    return res.json({ Job })
+    return res.json({ jobs })
 
 }
 
