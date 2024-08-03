@@ -5,12 +5,14 @@ const cors = require('cors');
 const userRouter = require('./routes/user_routes.js');
 const jobsRouter = require('./routes/job_routes.js');
 const jobApplicationRouter = require('./routes/application.routes.js');
+const fileUpload = require('express-fileupload');
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(fileUpload());
 app.use("/user", userRouter);
 app.use("/jobs", jobsRouter);
 app.use("/application/form", jobApplicationRouter)

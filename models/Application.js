@@ -5,7 +5,7 @@ const jobApplicationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    last_email: {
+    last_name: {
         type: String,
         unique: true,
         required: true,
@@ -24,6 +24,11 @@ const jobApplicationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    country_or_region: {
+        type: String,
+        required: true,
+    },
+
     experience: {
         type: String,
         required: true,
@@ -39,4 +44,4 @@ const jobApplicationSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("Job Application", jobApplicationSchema);
+module.exports = mongoose.model("Job_Application", jobApplicationSchema);
