@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose");
 const Job_Application = require("../models/Application.js");
 
 module.exports.addJobApplication = async (req, res) => {
-    const { first_name, last_name, email, phone_number,  country_or_region, experience, area_of_interest, about_applicant } = req.body;
+    const { first_name, last_name, email, phone_number, country_or_region, experience, area_of_interest, about_applicant } = req.body;
 
     let resume = '';
     if (req.files && req.files.resume) {
@@ -10,7 +10,7 @@ module.exports.addJobApplication = async (req, res) => {
         resume = 'uploads/' + resumeFile.name;
         resumeFile.mv(resume, function (err) {
             if (err) {
-                return res.status(500).send(err);
+                return res.status(500).json({ message: "Resume Not Uploaded" });
             }
         });
     }
@@ -19,7 +19,7 @@ module.exports.addJobApplication = async (req, res) => {
         last_name,
         email,
         phone_number,
-        resume,
+        resume: resume,
         country_or_region,
         experience,
         area_of_interest,
@@ -30,10 +30,14 @@ module.exports.addJobApplication = async (req, res) => {
         session.startTransaction({ session });
         await applicationForm.save();
         await session.commitTransaction();
+        session.endSession();
     } catch (err) {
-        return res.json({ message: err })
+        if (err.code === 11000) {
+            return res.status(400).json({ message: "Duplicate key Error" })
+        }
+        return res.status(500).json({ message: err })
     }
 
-    return res.json({ applicationForm })
+    return res.status(201).json({ applicationForm })
 
 }
